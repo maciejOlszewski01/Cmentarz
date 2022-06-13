@@ -18,7 +18,6 @@ Miejsce Cmentarz::wyszukajMiejsce(std::string imie, std::string nazwisko)
             return Miejsca.at(i);
         }
     }
-    std::cout << "Nie znaleziono";
     return Miejsce();
 
     

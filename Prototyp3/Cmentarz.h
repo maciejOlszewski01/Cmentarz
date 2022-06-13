@@ -4,6 +4,7 @@
 
 #include"Miejsce.h"
 #include"Pogrzebanie.h"
+#include "Kaplica.h"
 
 class Cmentarz
 {
@@ -17,6 +18,7 @@ public:
 protected:
 	std::vector<Miejsce> Miejsca;
 	std::string lokalizacja;
+	std::vector<Kaplica> listaKaplic;
 private:
 	static Cmentarz* instancja;
 	Cmentarz(){};
