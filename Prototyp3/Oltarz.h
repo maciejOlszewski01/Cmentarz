@@ -1,4 +1,6 @@
 #pragma once
+#include "Rezerwacja.h"
+#include <vector>
 class Oltarz
 {
 	Oltarz();
@@ -9,7 +11,7 @@ protected:
 	float cena;
 	float powierzchnia;
 	int miejscaSiedzace;
-
+	std::vector<Rezerwacja> listaRezerwacji;
 
 };
 

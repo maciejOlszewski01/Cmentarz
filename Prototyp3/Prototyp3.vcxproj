@@ -165,7 +165,9 @@
     <ClCompile Include="Osoba_Funkcyjna.cpp" />
     <ClCompile Include="Pogrzebanie.cpp" />
     <ClCompile Include="Pracownik.cpp" />
+    <ClCompile Include="Przedluz.cpp" />
     <ClCompile Include="Rezerwacja.cpp" />
+    <ClCompile Include="Zakup.cpp" />
     <ClCompile Include="Źródło.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +182,9 @@
     <ClInclude Include="Osoba_Funkcyjna.h" />
     <ClInclude Include="Pogrzebanie.h" />
     <ClInclude Include="Pracownik.h" />
+    <ClInclude Include="Przedluz.h" />
     <ClInclude Include="Rezerwacja.h" />
+    <ClInclude Include="Zakup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
