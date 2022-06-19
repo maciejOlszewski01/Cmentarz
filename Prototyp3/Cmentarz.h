@@ -13,7 +13,8 @@ public:
 	Cmentarz(Cmentarz const&) = delete;
 	void operator=(const Cmentarz&) = delete;
 	static Cmentarz& getInstance();
-	void DodajMiejsce(Miejsce);
+	void DodajMiejsce(Miejsce miejsce);
+	void DodajKaplice(Kaplica kaplica);
 	Miejsce wyszukajMiejsce(std::string imie,std::string nazwisko);
 protected:
 	std::vector<Miejsce> Miejsca;

@@ -10,30 +10,28 @@
 
 
 
-std::tuple<Osoba*, int> autoryzuj(std::string kod, std::vector<Pracownik> listaPrac, std::vector<Administrator> listAdm) {
+std::tuple<Osoba*, int> autoryzuj(std::string kod, std::vector<Pracownik>& listaPrac, std::vector<Administrator>&listAdm) {
 	
 	for (int i = 0; i < listaPrac.size(); i++) {
 		if (kod == listaPrac[i].getKodAutoryzacyjny()) {
-			std::cout << "autoryzowano \n";
-			std::cout << listaPrac[i].getImie() << listaPrac[i].getNazwisko() << "\n";
 			return { &listaPrac[i],1 };
 		}
 	}
 	for (int i = 0; i < listAdm.size(); i++) {
 				if (kod == listAdm[i].getKodAutoryzacyjny()) {
 				Administrator Temp = listAdm[i];
-				std::cout << "autoryzowano \n";
-				std::cout << Temp.getImie() << Temp.getNazwisko() << "\n";
 				return { &listAdm[i],0 };
 		}
 	}
-		std::cout << "NIEAUTORYZOWANO";
 		throw "aaaaa";
 	
 }
 
 
 int main() {
+
+
+	//PREPAROWANIE DANYCH
 
 	std::vector<Pracownik> Pracownicy;
 	std::vector<Administrator> Admini;
@@ -62,7 +60,7 @@ int main() {
 	Cmentarz::getInstance().DodajMiejsce(specjalneMiejsce);
 	Cmentarz::getInstance().wyszukajMiejsce("Tom","Dom");
 	Miejsce::ZmienStanMiejsca(miejsca, 6, "ZOMBIE");
-	std::cout << miejsca.at(9).getStan();
+	//std::cout << miejsca.at(9).getStan();
 	
 	for (int i = 0; i < 9; i++) {
 		Pracownicy.push_back(Pracownik());
@@ -76,16 +74,20 @@ int main() {
 	Admini.push_back(Administrator("Romek", "Atotemk", "RomekAtomek@02.pl", 909099090, "1337"));
 	
 	std::string wprowadzonyKod;
-	std::cin >> wprowadzonyKod;
 
-	
+
+
+
+	//PRAWDZIWY MAIN
+
+
+	std::cin >> wprowadzonyKod;
 	auto [uzytkownik, typ] = autoryzuj(wprowadzonyKod, Pracownicy, Admini);
 	
-	//Cos nie dziala zla alokacja pamieci nie wiem jak to zdowncastowac scastowac
-	Pracownik *uzytkown = (Pracownik*)uzytkownik;
-	//std::cout << uzytkown->getKodAutoryzacyjny();
 
 	if (typ == 1) {
+		Pracownik* uzytkown = (Pracownik*)uzytkownik;
+		std::cout << "Witaj " << uzytkown->getImie() << " " << uzytkown->getNazwisko() << "\n";
 		while (true) {
 			int wyborPierwszy = 0;
 			std::cout << "1. Pokaz grafik\n2. Potwierdz Grafik";
@@ -104,6 +106,8 @@ int main() {
 		}
 	}
 	else {
+		Administrator* uzytkown = (Administrator*)uzytkownik;
+		std::cout << "Witaj " << uzytkown->getImie() << " " << uzytkown->getNazwisko() << "\n";
 		while (true) {
 			int wyborPierwszy = 0;
 			std::cout << "1. Przenies Cialo\n2. Zwolnij miejsce\n3.Sprawdz waznosc oplat\n4.Generuj raport";

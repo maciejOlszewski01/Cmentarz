@@ -1,7 +1,7 @@
 #pragma once
 #include "Pogrzebanie.h"
-class Miejsce;
 class Klient;
+class kodZakupu;
 class Zakup
 {
 	Zakup();
@@ -9,7 +9,7 @@ class Zakup
 	int idZakupu;
 	float oplata;
 	int id;
-	Miejsce* zakupione;
+	kodZakupu* zakupione;
 	Klient* kupujacy;
 };
 

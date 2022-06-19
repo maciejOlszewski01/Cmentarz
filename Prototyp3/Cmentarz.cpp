@@ -11,6 +11,11 @@ void Cmentarz::DodajMiejsce(Miejsce miejsce)
     Miejsca.push_back(miejsce);
 }
 
+void Cmentarz::DodajKaplice(Kaplica kaplica)
+{
+    listaKaplic.push_back(kaplica);
+}
+
 Miejsce Cmentarz::wyszukajMiejsce(std::string imie, std::string nazwisko)
 {
     for (int i = 0; i < Miejsca.size(); i++) {

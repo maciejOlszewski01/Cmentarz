@@ -158,6 +158,7 @@
     <ClCompile Include="Cmentarz.cpp" />
     <ClCompile Include="Kaplica.cpp" />
     <ClCompile Include="Klient.cpp" />
+    <ClCompile Include="KodZakupu.cpp" />
     <ClCompile Include="Ksiadz.cpp" />
     <ClCompile Include="Miejsce.cpp" />
     <ClCompile Include="Oltarz.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Cmentarz.h" />
     <ClInclude Include="Kaplica.h" />
     <ClInclude Include="Klient.h" />
+    <ClInclude Include="KodZakupu.h" />
     <ClInclude Include="Ksiadz.h" />
     <ClInclude Include="Miejsce.h" />
     <ClInclude Include="Oltarz.h" />
