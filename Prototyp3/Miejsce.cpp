@@ -14,6 +14,16 @@ Pogrzebanie* Miejsce::getPogrzebanie()
 	return ceremonia;
 }
 
+std::string Miejsce::getSekcja()
+{
+	return this->Sekcja;
+}
+
+std::string Miejsce::getRzad()
+{
+	return this->Rzad;
+}
+
 Miejsce::Miejsce(const Miejsce& kopiowane)
 {
 	this->ceremonia = kopiowane.ceremonia;
@@ -43,5 +53,29 @@ void Miejsce::ZmienStanMiejsca( std::vector<Miejsce>& spis ,int id, std::string 
 		if (spis[i].IdMiejsca == id) {
 			spis[i].Stan = Stan;
 		}
+}
+
+void Miejsce::PrzeniesCialo(Miejsce* dokad)
+{
+	if(dokad->Rzad == ""){
+		this->ceremonia = nullptr;
+		throw 2;
+	}
+	time_t now = time(0);
+	struct tm newtime;
+	localtime_s(&newtime, &now);
+	if (dokad->ceremonia == nullptr || (dokad->WaznoscOplaty.tm_year < newtime.tm_year && dokad->WaznoscOplaty.tm_mon < newtime.tm_mon && dokad->WaznoscOplaty.tm_mday < newtime.tm_mday)) {
+		dokad->ceremonia = this->ceremonia;
+		this->ceremonia = nullptr;
+	}
+	else {
+		throw 3;
+	}
+
+
+
+
+
+
 }
 

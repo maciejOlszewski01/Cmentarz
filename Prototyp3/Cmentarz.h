@@ -15,7 +15,9 @@ public:
 	static Cmentarz& getInstance();
 	void DodajMiejsce(Miejsce miejsce);
 	void DodajKaplice(Kaplica kaplica);
-	Miejsce wyszukajMiejsce(std::string imie,std::string nazwisko);
+	Miejsce* wyszukajMiejsce(std::string imie,std::string nazwisko);
+	Miejsce* GetMiejsce(int i);
+	void PokazListe();
 protected:
 	std::vector<Miejsce> Miejsca;
 	std::string lokalizacja;
