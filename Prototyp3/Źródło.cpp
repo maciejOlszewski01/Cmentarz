@@ -97,7 +97,7 @@ int main() {
 	Cmentarz::getInstance().DodajMiejsce(Miejsce(nullptr, 14, pusta, "R", "2c43", "Wolne"));
 
 	//Cmentarz::getInstance().wyszukajMiejsce("Tom","Dom");
-	Miejsce::ZmienStanMiejsca(miejsca, 6, "ZOMBIE");
+
 	//std::cout << miejsca.at(9).getStan();
 	
 	for (int i = 0; i < 9; i++) {
@@ -118,7 +118,7 @@ int main() {
 	Miejsce* pomocnicze2 = new Miejsce();
 	Miejsce* pomocnicze3;
 	int pomocniczaInt;
-	Cmentarz::getInstance().PokazListe();
+	//Cmentarz::getInstance().PokazListe();
 	//PRAWDZIWY MAIN
 
 
@@ -189,10 +189,14 @@ int main() {
 				}
 				break;
 			case 2:
-
+				Cmentarz::getInstance().PokazListe();
+				std::cout << "Ktore miejsce chcesz zwolnic\n";
+				std::cin >> pomocniczaInt;
+				Cmentarz::getInstance().GetMiejsce(pomocniczaInt)->ZmienStanMiejsca("Wolne");
+				Cmentarz::getInstance().PokazListe();
 				break;
 			case 3:
-
+				Cmentarz::getInstance().SprawdzWaznoscOplat();
 				break;
 			case 4:
 

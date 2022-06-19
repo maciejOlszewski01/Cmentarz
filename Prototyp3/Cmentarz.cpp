@@ -50,3 +50,17 @@ void Cmentarz::PokazListe()
     }
     std::cout << "\n";
 }
+
+void Cmentarz::SprawdzWaznoscOplat()
+{
+    for (int i = 0; i < Miejsca.size(); i++) {
+        if (Miejsca.at(i).getPogrzebanie() != nullptr) {
+            time_t now = time(0);
+            struct tm newtime;
+            localtime_s(&newtime, &now);
+            if (Miejsca.at(i).getWaznosc().tm_year < newtime.tm_year && Miejsca.at(i).getWaznosc().tm_mon < newtime.tm_mon && Miejsca.at(i).getWaznosc().tm_mday < newtime.tm_mday) {
+                std::cout << i << " " << Miejsca.at(i).getSekcja() << " " << Miejsca.at(i).getRzad() << "\n";
+            }
+        }
+    }
+}

@@ -47,12 +47,12 @@ Miejsce::Miejsce(Pogrzebanie* ceremonia, int IdMiejsca, tm WaznoscOplaty, std::s
 
 }
 
-void Miejsce::ZmienStanMiejsca( std::vector<Miejsce>& spis ,int id, std::string Stan)
+void Miejsce::ZmienStanMiejsca(std::string Stan)
 {
-	for (int i = 0; i < spis.size(); i++)
-		if (spis[i].IdMiejsca == id) {
-			spis[i].Stan = Stan;
-		}
+	this->Stan = Stan;
+	if (Stan == "Wolne") {
+		this->ceremonia = nullptr;
+	}
 }
 
 void Miejsce::PrzeniesCialo(Miejsce* dokad)
@@ -67,6 +67,7 @@ void Miejsce::PrzeniesCialo(Miejsce* dokad)
 	if (dokad->ceremonia == nullptr || (dokad->WaznoscOplaty.tm_year < newtime.tm_year && dokad->WaznoscOplaty.tm_mon < newtime.tm_mon && dokad->WaznoscOplaty.tm_mday < newtime.tm_mday)) {
 		dokad->ceremonia = this->ceremonia;
 		this->ceremonia = nullptr;
+		this->Stan = "Wolne";
 	}
 	else {
 		throw 3;
@@ -78,4 +79,29 @@ void Miejsce::PrzeniesCialo(Miejsce* dokad)
 
 
 }
+
+tm Miejsce::getWaznosc()
+{
+	return this->WaznoscOplaty;
+}
+
+
+
+Miejsce* Miejsce::SprawdzWaznoscOplat()
+{
+	if (this->ceremonia != nullptr) {
+		time_t now = time(0);
+		struct tm newtime;
+		localtime_s(&newtime, &now);
+		if (this->WaznoscOplaty.tm_year < newtime.tm_year && this->WaznoscOplaty.tm_mon < newtime.tm_mon && this->WaznoscOplaty.tm_mday < newtime.tm_mday) {
+			return this;
+		}
+	}
+	return nullptr;
+}
+
+/*void Miejsce::SetPogrzebanie(Pogrzebanie* pogrzebana)
+{
+	this->
+}*/
 

@@ -18,6 +18,7 @@ public:
 	Miejsce* wyszukajMiejsce(std::string imie,std::string nazwisko);
 	Miejsce* GetMiejsce(int i);
 	void PokazListe();
+	void SprawdzWaznoscOplat();
 protected:
 	std::vector<Miejsce> Miejsca;
 	std::string lokalizacja;
