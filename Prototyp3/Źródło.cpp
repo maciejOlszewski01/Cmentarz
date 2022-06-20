@@ -7,14 +7,23 @@
 #include <typeinfo>
 #include <tuple>
 #include "Cmentarz.h"
+#include "Zlecenie.h"
+#include "KodZakupu.h"
+#include "Harmonogram.h"
 
+void wyswietldate(tm data) {
+	std::cout << "Rok: " << data.tm_year+1900 << " Miesiac: " << data.tm_mon << " Dzien: " << data.tm_mday << " Godzina " << data.tm_hour + 1 << " Kopanie " << "\n";
+}
 
-
-std::tuple<Osoba*, int> autoryzuj(std::string kod, std::vector<Pracownik>& listaPrac, std::vector<Administrator>&listAdm) {
+std::tuple<Osoba*, int> autoryzuj(std::string kod, std::vector<Pracownik>& listaPrac, std::vector<Administrator>&listAdm,int& pomo) {
 	
 	for (int i = 0; i < listaPrac.size(); i++) {
+		if (listaPrac[i].getKodAutoryzacyjny() != "") {
+			pomo = pomo + 1;
+		}
 		if (kod == listaPrac[i].getKodAutoryzacyjny()) {
 			return { &listaPrac[i],1 };
+
 		}
 	}
 	for (int i = 0; i < listAdm.size(); i++) {
@@ -96,14 +105,59 @@ int main() {
 	Cmentarz::getInstance().DodajMiejsce(Miejsce(nullptr, 13, pusta, "L", "24", "Wolne"));
 	Cmentarz::getInstance().DodajMiejsce(Miejsce(nullptr, 14, pusta, "R", "2c43", "Wolne"));
 
-	//Cmentarz::getInstance().wyszukajMiejsce("Tom","Dom");
 
-	//std::cout << miejsca.at(9).getStan();
+	std::vector<KodZakupu> kody;
+
+	kody.push_back(KodZakupu(54545451, Cmentarz::getInstance().GetMiejsce(4)));
+	kody.push_back(KodZakupu(54545452, Cmentarz::getInstance().GetMiejsce(5)));
+	kody.push_back(KodZakupu(54545453, Cmentarz::getInstance().GetMiejsce(6)));
 	
+	//Cmentarz::getInstance().wyszukajMiejsce("Tom","Dom");
+	std::vector<Zlecenie> Zlecenia;
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan", "Dzban", 5, 10, 2022, 13, 54545451));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan1", "Dzban1", 5, 10, 2022, 13, 54545452));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan2", "Dzban2", 5, 10, 2022, 13, 54545453));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan3", "Dzban3", 5, 10, 2022, 13, 54545454));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan4", "Dzban4", 5, 10, 2022, 13, 54545455));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan5", "Dzban5", 5, 10, 2022, 13, 54545456));
+	Zlecenia.push_back(Zlecenie::ZlozZlecenie("Jan6", "Dzban6", 5, 10, 2022, 13, 54545457));
+	//std::cout << miejsca.at(9).getStan();
+	/*
+	for (int i = 0; i < Zlecenia.size(); i++) {
+		for (int j = 0; j < kody.size(); j++) {
+			if (kody.at(j).getNumerKodu() == Zlecenia.at(i).getKodZakupu()) {
+				Zlecenia.at(i).ZrealizujZlecenie(&kody.at(j));
+			}
+		}
+	}*/
+
+	tm losowaData4;
+	losowaData4.tm_year = 122;
+	losowaData4.tm_mon = 5;
+	losowaData4.tm_mday = 21;
+	
+	tm losowaData5;
+	losowaData5.tm_year = 122;
+	losowaData5.tm_mon = 5;
+	losowaData5.tm_mday = 21;
+	std::vector<tm> daty;
+	daty.push_back(losowaData4);
+	daty.push_back(losowaData5);
+	
+	tm losowaData6;
+	losowaData6.tm_year = 122;
+	losowaData6.tm_mon = 5;
+	losowaData6.tm_mday = 21;
+
+	std::vector<tm> daty2;
+	daty2.push_back(losowaData6);
+
 	for (int i = 0; i < 9; i++) {
 		Pracownicy.push_back(Pracownik());
 	}
+	int pomo = -1;
 	Pracownicy.push_back(Pracownik("Tomek", "Brzenczek", "Brzenczek@02.pl", 909099090, "Grabarz", "2137"));
+	Pracownicy.push_back(Pracownik("Tomek2", "Brzenczek2", "Brzenczek@02.pl", 909099090, "Grabarz", "21374"));
 	//std::cout << Osoba::ID;
 
 	for (int i = 0; i < 9; i++) {
@@ -118,12 +172,30 @@ int main() {
 	Miejsce* pomocnicze2 = new Miejsce();
 	Miejsce* pomocnicze3;
 	int pomocniczaInt;
+	Harmonogram nowy = Harmonogram();
+	nowy.Uloz(daty, 9);
+	Harmonogram nowy2 = Harmonogram();
+	nowy2.Uloz(daty2, 10);
+	//wyswietldate(nowy.daty.at(0));
+
+	std::vector<Harmonogram> harmonorgamy;
+	harmonorgamy.push_back(nowy);
+	harmonorgamy.push_back(nowy2);
 	//Cmentarz::getInstance().PokazListe();
+	// 
+	// 
+	// KLIENT 
+
+	
+
+
+	// 
+	// 
 	//PRAWDZIWY MAIN
 
-
+	std::cout << "Podaj kod\n";
 	std::cin >> wprowadzonyKod;
-	auto [uzytkownik, typ] = autoryzuj(wprowadzonyKod, Pracownicy, Admini);
+	auto [uzytkownik, typ] = autoryzuj(wprowadzonyKod, Pracownicy, Admini,pomo);
 	
 
 	if (typ == 1) {
@@ -131,18 +203,20 @@ int main() {
 		std::cout << "Witaj " << uzytkown->getImie() << " " << uzytkown->getNazwisko() << "\n";
 		while (true) {
 			int wyborPierwszy = 0;
-			std::cout << "1. Pokaz grafik\n2. Potwierdz Grafik";
+			std::cout << "1. Pokaz grafik\n2. Potwierdz Grafik\n";
 			std::cin >> wyborPierwszy;
 			switch (wyborPierwszy) {
 			case 1:
-
+				for (int i = 0; i < harmonorgamy.at(pomo).daty.size(); i++) {
+					wyswietldate(harmonorgamy.at(pomo).daty.at(i));
+				}
 				break;
 			case 2:
-
+				harmonorgamy.at(pomo).Potwierdz();
 				break;
 
 			default:
-				std::cout << "cos";
+				break;
 			}
 		}
 	}
@@ -151,7 +225,7 @@ int main() {
 		std::cout << "Witaj " << uzytkown->getImie() << " " << uzytkown->getNazwisko() << "\n";
 		while (true) {
 			int wyborPierwszy = 0;
-			std::cout << "1. Przenies Cialo\n2. Zwolnij miejsce\n3.Sprawdz waznosc oplat\n4.Generuj raport\n";
+			std::cout << "1. Przenies Cialo\n2. Zwolnij miejsce\n3.Sprawdz waznosc oplat\n4.Wyœwietl harmonogramy\n";
 			std::cin >> wyborPierwszy;
 			switch (wyborPierwszy) {
 			case 1:
@@ -199,10 +273,14 @@ int main() {
 				Cmentarz::getInstance().SprawdzWaznoscOplat();
 				break;
 			case 4:
-
+				std::cout << "Podaj id Pracownika którego harmonogram chcesz wyœwietliæ\n";
+				std::cin >> pomocniczaInt;
+				for (int i = 0; i < harmonorgamy.at(pomocniczaInt).daty.size(); i++) {
+					wyswietldate(harmonorgamy.at(pomocniczaInt).daty.at(i));
+				}
 				break;
 			default:
-				std::cout << "cos";
+				break;
 			}
 		}
 	}

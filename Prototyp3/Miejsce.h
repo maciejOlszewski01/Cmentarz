@@ -16,6 +16,7 @@ public:
 	void ZmienStanMiejsca( std::string Stan);
 	void PrzeniesCialo(Miejsce* dokad);
 	tm getWaznosc();
+	void setCialo(Pogrzebanie* osoba);
 	
 	Miejsce* SprawdzWaznoscOplat();
 	//void SetPogrzebanie(Pogrzebanie* pogrzebana);

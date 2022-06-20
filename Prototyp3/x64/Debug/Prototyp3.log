@@ -1,3 +1,3 @@
 ﻿  Źródło.cpp
-C:\Users\hp\source\repos\Prototyp3\Prototyp3\Źródło.cpp(119,11): warning C4101: "pomocnicze3": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\hp\source\repos\Prototyp3\Prototyp3\Źródło.cpp(173,11): warning C4101: "pomocnicze3": lokalna zmienna, do której nie istnieje odwołanie
   Prototyp3.vcxproj -> C:\Users\hp\source\repos\Prototyp3\x64\Debug\Prototyp3.exe

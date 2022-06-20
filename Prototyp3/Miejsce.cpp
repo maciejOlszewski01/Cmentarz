@@ -85,6 +85,11 @@ tm Miejsce::getWaznosc()
 	return this->WaznoscOplaty;
 }
 
+void Miejsce::setCialo(Pogrzebanie* osoba)
+{
+	ceremonia = osoba;
+}
+
 
 
 Miejsce* Miejsce::SprawdzWaznoscOplat()
